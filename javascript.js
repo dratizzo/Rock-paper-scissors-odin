@@ -35,6 +35,7 @@ function playGame() {
 
         console.log("Escolha humano:", humanChoice);
         console.log("Escolha máquina:", computerChoice);
+        console.log("-------------------------------")
 
         // Caso seja empate
         if (humanChoice === computerChoice) {
