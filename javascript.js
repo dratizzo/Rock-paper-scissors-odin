@@ -11,6 +11,10 @@ function getComputerChoice() {
     }
 }
 
+function clearChildren(element) {
+    element.innerHTML = '';
+}
+
 function playGame() {
     
     // Inicialização das variáveis de pontuação
@@ -19,46 +23,48 @@ function playGame() {
 
     function playRound(humanChoice, computerChoice) {
 
-        console.log("Escolha humano:", humanChoice);
-        console.log("Escolha máquina:", computerChoice);
-        console.log("-------------------------------")
+        const displayDiv = document.querySelector("div");
 
+        let pEscolhas = document.createElement("p");
+
+        pEscolhas.textContent = `Human choice: ${humanChoice}, Computer choice: ${computerChoice}`
+
+        displayDiv.appendChild(pEscolhas);
+        
         pRoundWinner = document.createElement("p");
+        showPoints = document.createElement("p");
 
         if (humanChoice == "rock" && computerChoice == "paper" || humanChoice == "scissors" && computerChoice == "rock" || humanChoice == "paper" && computerChoice == "scissors") {
             computerScore++;
-            pRoundWinner.textContent = "E começa a era das máquinas!";
+            pRoundWinner.textContent = `Vencedor do round: máquina!, ${computerScore} ponto(s)`;
         } else if (humanChoice == "rock" && computerChoice == "scissors" || humanChoice == "scissors" && computerChoice == "paper" || humanChoice == "paper" && computerChoice == "rock") {
             humanScore++;
-            pRoundWinner.textContent = "Humanos superiores!";
+            pRoundWinner.textContent = `Vencedor do round: humano!, ${humanScore} ponto(s)`;
         } else {
-            console.log("Drawn!");
             pRoundWinner.textContent = "Empate!";
         }
 
         if (humanScore >= 5) {
-            pRoundWinner.textContent = "Vencedor final: humano!";
+            clearChildren(displayDiv);
+            pRoundWinner.textContent = "Humanos superiores vencem!";
             humanScore = 0;
             computerScore = 0;
         } else if (computerScore >= 5) {
-            pRoundWinner.textContent = "Vencedor final: máquina!";
+            clearChildren(displayDiv);
+            pRoundWinner.textContent = "E começa a era das máquinas!";
             humanScore = 0;
             computerScore = 0;
         }
 
-        const displayDiv = document.querySelector("div");
         displayDiv.appendChild(pRoundWinner);
 
-        console.log("Pontuação humano:", humanScore);
-        console.log("Pontuação máquina:", computerScore);
     }
 
-    let btnRock = document.querySelector("#rock")
-    const btnPaper = document.querySelector(".paper")
-    const btnScissors = document.querySelector(".scissors")
+    let btnRock = document.querySelector("#rock");
+    const btnPaper = document.querySelector(".paper");
+    const btnScissors = document.querySelector(".scissors");
 
     btnRock.addEventListener('click', () => {
-        console.log('chega aqui');
         playRound('rock', getComputerChoice());
     });
 
