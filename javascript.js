@@ -32,7 +32,6 @@ function playGame() {
         displayDiv.appendChild(pEscolhas);
         
         pRoundWinner = document.createElement("p");
-        showPoints = document.createElement("p");
 
         if (humanChoice == "rock" && computerChoice == "paper" || humanChoice == "scissors" && computerChoice == "rock" || humanChoice == "paper" && computerChoice == "scissors") {
             computerScore++;
